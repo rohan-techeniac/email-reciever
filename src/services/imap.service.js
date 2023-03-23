@@ -1,6 +1,6 @@
 const { accessTokenService } = require("../services/token.service");
 const notifier = require("mail-notifier");
-const config = require("../config/config");
+const config = require("../config");
 
 const startImap = async () => {
   const token = await accessTokenService().catch((e) => console.log(e));
@@ -11,14 +11,14 @@ const startImap = async () => {
       "utf-8"
     ).toString("base64");
 
-  xoauthtoken = _build_XOAuth2_token(config.EMAIL, token.access_token);
+  xoauthtoken = _build_XOAuth2_token(config.imap.EMAIL, token.access_token);
 
   const imap = {
     xoauth2: xoauthtoken,
-    user: config.EMAIL,
-    password: config.EMAIL_PASSWORD, // Will be deprecated on May 30, 2022
-    host: config.IMAPHOST,
-    port: config.IMAPPORT, // imap port
+    user: config.imap.EMAIL,
+    password: config.imap.EMAIL_PASSWORD, // Will be deprecated on May 30, 2022
+    host: config.imap.IMAPHOST,
+    port: config.imap.IMAPPORT, // imap port
     tls: true,
     tlsOptions: { rejectUnauthorized: false },
   };

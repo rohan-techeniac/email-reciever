@@ -9,15 +9,13 @@ dotenv.config({ path: path.join(__dirname, "../../.env") });
 const envVarsSchema = Joi.object()
   .keys({
     PORT: Joi.number().default(3000),
-    IMAPPORT: Joi.number().required(),
-    IMAPHOST: Joi.string().description("Imap Host to connect to").required(),
     CLIENT_ID: Joi.string().description("Client ID").required(),
     CLIENT_SECRET: Joi.string().description("Client Secret").required(),
     SCOPES: Joi.string().description("Scopes").required(),
     AUTHORITY: Joi.string().description("Common").required(),
+    ACCESS_TOKEN_URL: Joi.string().description("AccessTokenUrl").required(),
     EMAIL: Joi.string().description("Emailaddress").required(),
     PASSWORD: Joi.string().description("Emailpassword").required(),
-    ACCESS_TOKEN_URL: Joi.string().description("AccessTokenUrl").required(),
   })
   .unknown();
 
@@ -37,9 +35,7 @@ module.exports = {
   CLIENT_SECRET: envVars.CLIENT_SECRET,
   SCOPES: envVars.SCOPES,
   COMMON: envVars.AUTHORITY,
+  ACCESS_TOKEN_URL: envVars.ACCESS_TOKEN_URL,
   EMAIL: envVars.EMAIL,
   EMAIL_PASSWORD: envVars.PASSWORD,
-  ACCESS_TOKEN_URL: envVars.ACCESS_TOKEN_URL,
-  IMAPPORT: envVars.IMAPPORT,
-  IMAPHOST: envVars.IMAPHOST,
 };

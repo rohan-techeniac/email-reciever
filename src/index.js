@@ -1,9 +1,10 @@
 const cors = require("cors");
 const express = require("express");
 const bodyParser = require("body-parser");
-const config = require("./config/config");
+const config = require("./config/app.config");
 const dotenv = require("dotenv");
 const startImap = require("./services/imap.service");
+const ftpListener = require("./services/ftp.service");
 
 //Setup Server
 const app = express();
@@ -16,6 +17,7 @@ const PORT = config.PORT || 3000;
 
 app.listen(PORT, () => {
   startImap();
+  ftpListener.start();
   console.log(`App listening on port ${PORT}`);
 });
 
